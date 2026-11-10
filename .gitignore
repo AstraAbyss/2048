@@ -6,6 +6,7 @@ src-tauri/gen/
 .cache/
 .rust/
 .tools/
+.runtime/
 .pnpm-store/
 *.local
 *.log

@@ -73,6 +73,19 @@ src-tauri/target/release/bundle/nsis/
 | `release/2048_0.1.0_x64-setup.exe` | Windows 10/11 x64 单用户安装包，约 2 MB |
 | `release/SHA256SUMS.txt` | 安装包 SHA-256 校验值 |
 
+## 本地运行
+
+- **安装版**：双击 `release/2048_0.1.0_x64-setup.exe` 安装，然后从开始菜单启动。
+- **免安装版**：双击项目根目录的 `run.cmd`。脚本会使用 `.runtime\data` 作为本地数据目录并启动编译好的应用。
+- **直接运行可执行文件**：
+
+```powershell
+$env:GAME2048_DATA_DIR="E:\Project\2048\.runtime\data"
+.\src-tauri\target\release\game2048.exe
+```
+
+普通安装版默认使用 `%APPDATA%\com.game2048.desktop`。`GAME2048_DATA_DIR` 会同时覆盖 Tauri 的应用目录和 WebView2 数据目录，适合便携运行或把数据放在项目内。
+
 ## 快捷键
 
 | 按键 | 功能 |
@@ -101,7 +114,7 @@ src-tauri/target/release/bundle/nsis/
 
 重置全部数据会删除上述文件。清空历史只删除历史记录，不影响当前对局和最高分。
 
-调试或做便携式运行时，可用 `GAME2048_DATA_DIR` 覆盖数据目录。WebView2 数据目录可通过 `WEBVIEW2_USER_DATA_FOLDER` 单独指定；普通用户无需设置这些变量。
+调试或做便携式运行时，可用 `GAME2048_DATA_DIR` 覆盖数据目录；它会同时影响 Tauri 应用目录和 WebView2 数据目录，普通用户无需设置。
 
 ## 项目结构
 

@@ -51,6 +51,14 @@ fn reset_all(storage: State<'_, Storage>) -> Result<(), String> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let mut context = tauri::generate_context!();
+    if let Ok(data_dir) = std::env::var("GAME2048_DATA_DIR") {
+        if !data_dir.trim().is_empty() {
+            context.config_mut().app.app_directories_override =
+                Some(tauri::utils::config::AppDirectoriesOverride::Root(data_dir.into()));
+        }
+    }
+
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
             if let Some(window) = app.get_webview_window("main") {
@@ -78,6 +86,6 @@ pub fn run() {
             clear_history,
             reset_all
         ])
-        .run(tauri::generate_context!())
+        .run(context)
         .expect("error while running 2048");
 }
