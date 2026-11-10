@@ -1,0 +1,17 @@
+node_modules/
+dist/
+dist-ssr/
+src-tauri/target/
+src-tauri/gen/
+.cache/
+.rust/
+.tools/
+.pnpm-store/
+*.local
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+coverage/
