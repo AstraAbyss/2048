@@ -76,15 +76,22 @@ src-tauri/target/release/bundle/nsis/
 ## 本地运行
 
 - **安装版**：双击 `release/2048_0.1.0_x64-setup.exe` 安装，然后从开始菜单启动。
-- **免安装版**：双击项目根目录的 `run.cmd`。脚本会使用 `.runtime\data` 作为本地数据目录并启动编译好的应用。
-- **直接运行可执行文件**：
+- **免安装版**：直接双击 `src-tauri\target\release\game2048.exe`；也可以双击项目根目录的 `run.cmd`。
+- **开发模式**：
 
 ```powershell
-$env:GAME2048_DATA_DIR="E:\Project\2048\.runtime\data"
-.\src-tauri\target\release\game2048.exe
+npm run tauri dev
 ```
 
-普通安装版默认使用 `%APPDATA%\com.game2048.desktop`。`GAME2048_DATA_DIR` 会同时覆盖 Tauri 的应用目录和 WebView2 数据目录，适合便携运行或把数据放在项目内。
+直接运行时不需要设置环境变量。默认使用可执行文件旁的 `app-data` 目录，因此免安装版可以把整个 `release` 目录复制到其他位置继续使用。
+
+```text
+src-tauri\target\release\
+  game2048.exe
+  app-data\
+```
+
+普通安装版同样使用安装目录下的 `app-data`。如需把数据放到指定目录，可设置 `GAME2048_DATA_DIR`。
 
 ## 快捷键
 
@@ -96,10 +103,10 @@ $env:GAME2048_DATA_DIR="E:\Project\2048\.runtime\data"
 
 ## 数据位置
 
-运行时数据保存在 Tauri 的 `app_data_dir`，Windows 下通常为：
+运行数据默认保存在可执行文件旁的 `app-data` 目录：
 
 ```text
-%APPDATA%\com.game2048.desktop\
+<可执行文件目录>\app-data\
   profile.json
   session.json
   history.json

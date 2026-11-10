@@ -10,6 +10,7 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "appDirectoriesOverride": "./app-data",
     "windows": [
       {
         "label": "main",

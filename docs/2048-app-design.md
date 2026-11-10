@@ -546,17 +546,17 @@ reset_all() -> void
 
 ### 8.2 文件布局
 
-由 Tauri 的 `app_data_dir` 决定根目录，Windows 下通常位于用户 AppData 的 Roaming 目录。逻辑结构：
+应用默认采用便携式数据目录，根目录为可执行文件旁的 `app-data/`；也可通过 `GAME2048_DATA_DIR` 覆盖（同时影响 Tauri 与 WebView2 数据目录）。逻辑结构：
 
 ```text
-<app_data_dir>/
+<应用目录>/app-data/
   profile.json       # 设置 + 最高分 + 累计统计
   session.json       # 当前对局（可为空）
   history.json       # 最近 200 局
   backups/
-    profile.bak
-    session.bak
-    history.bak
+    profile.json.bak
+    session.json.bak
+    history.json.bak
   corrupt/
     <timestamp>-session.json   # 无法恢复时保留原始文件
 ```
